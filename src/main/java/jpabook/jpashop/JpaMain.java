@@ -2,6 +2,8 @@ package jpabook.jpashop;
 
 import jpabook.entitymapping.Team;
 import jpabook.entitymapping.User;
+import jpabook.jpashop.domain.Order;
+import jpabook.jpashop.domain.OrderItem;
 
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
@@ -20,24 +22,8 @@ public class JpaMain {
 
         try {
             //저장
-            Team team = new Team();
-            team.setName("TeamA");
-//            team.getUserList().add(user);
-            em.persist(team);
-
-            User user = new User();
-            user.setUsername("user1");
-            user.changeTeam(team);
-            em.persist(user);
-
-            em.flush();
-            em.clear();
-
-            Team foundTeam = em.find(Team.class, team.getTeamId());
-            List<User> userList = foundTeam.getUserList();
-            for (User u : userList) {
-                System.out.println("u = " + u.getUsername());
-            }
+            Order order = new Order();
+            order.addOrderItem(new OrderItem());
 
             tx.commit();
         } catch (Exception e) {

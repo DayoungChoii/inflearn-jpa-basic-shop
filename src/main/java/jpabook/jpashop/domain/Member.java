@@ -1,9 +1,8 @@
 package jpabook.jpashop.domain;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
+import javax.persistence.*;
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 public class Member {
@@ -14,6 +13,10 @@ public class Member {
     private String city;
     private String street;
     private String zipcode;
+
+    //영한샘 피셜 이건 잘못된 설계! 객체를 계속 참조하는 것이 아니라 끊어주는 타이밍도 중요하다
+    @OneToMany(mappedBy = "member")
+    private List<Order> orders = new ArrayList<>();
 
     public Long getId() {
         return id;

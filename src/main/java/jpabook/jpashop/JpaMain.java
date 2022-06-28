@@ -2,7 +2,6 @@ package jpabook.jpashop;
 
 import jpabook.entitymapping.Team;
 import jpabook.entitymapping.User;
-import jpabook.jpashop.domain.Member;
 
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
@@ -23,21 +22,21 @@ public class JpaMain {
             //저장
             Team team = new Team();
             team.setName("TeamA");
+//            team.getUserList().add(user);
             em.persist(team);
 
             User user = new User();
             user.setUsername("user1");
-            user.setTeam(team);
+            user.changeTeam(team);
             em.persist(user);
 
             em.flush();
             em.clear();
 
-            User foundMember = em.find(User.class, user.getId());
-            List<User> users = foundMember.getTeam().getUserList();
-
-            for (User u : users) {
-                System.out.println("u = " + u.getId() );
+            Team foundTeam = em.find(Team.class, team.getTeamId());
+            List<User> userList = foundTeam.getUserList();
+            for (User u : userList) {
+                System.out.println("u = " + u.getUsername());
             }
 
             tx.commit();

@@ -47,7 +47,9 @@ public class User {
         return team;
     }
 
-    public void setTeam(Team team) {
+    //연관관계 메소드
+    public void changeTeam(Team team) {
         this.team = team;
+        team.getUserList().add(this);
     }
 }

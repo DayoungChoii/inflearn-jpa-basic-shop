@@ -1,9 +1,8 @@
 package jpabook.entitymapping;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
+import javax.persistence.*;
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 public class Team {
@@ -12,6 +11,9 @@ public class Team {
     private Long teamId;
 
     private String name;
+
+    @OneToMany(mappedBy = "team")
+    private List<User> userList = new ArrayList<>();
 
     public Long getTeamId() {
         return teamId;
@@ -27,5 +29,13 @@ public class Team {
 
     public void setName(String name) {
         this.name = name;
+    }
+
+    public List<User> getUserList() {
+        return userList;
+    }
+
+    public void setUserList(List<User> userList) {
+        this.userList = userList;
     }
 }
